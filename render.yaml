@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: student-city-guide
+    runtime: node
+    buildCommand: npm install && node db/seed.js
+    startCommand: node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        value: student-city-guide-secret-key-2024
