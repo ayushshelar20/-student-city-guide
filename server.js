@@ -15,8 +15,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static frontend files from public/
+// Serve static frontend files from public/ and root (for index.html)
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname));
 
 // ─── API Routes ──────────────────────────────────────────
 app.use('/api/auth', require('./routes/auth'));
@@ -32,7 +33,7 @@ app.get('/api/health', (req, res) => {
 // ─── SPA Fallback — serve index.html for all non-API routes ──
 app.get('*', (req, res) => {
   if (!req.path.startsWith('/api')) {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
   }
 });
 
